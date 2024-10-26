@@ -166,6 +166,10 @@ app.post('/mesaj/media', async (req, res) => {
     }
 });
 
+app.post('/mesaj/webhook', async (req, res) => {
+    // Alınan mesajlar, görüldü bilgileri bu alanda işlenecek.
+});
+
 app.listen(PORT, () => {
     console.log(`Test uygulamam ${ PORT } portundan çalışıyor.`)
 });
