@@ -42,7 +42,7 @@ Kullanım için <mark>mesaj</mark> ön tanımı ile gönderilmek istenen tür be
        {
          "toNumber": "905555555555",
           "message": "Tavşanlar Kaç Ayaklıdır?",
-          "options": [2","4"],
+          "options": ["2","4"],
           "only_one": true
        }
        ```
