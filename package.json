@@ -1,0 +1,15 @@
+{
+  "name": "maytapi",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "node ./src/Server.js"
+  },
+  "author": "Muhammed Terzi",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "axios": "^1.7.7",
+    "express": "^4.21.1"
+  }
+}
