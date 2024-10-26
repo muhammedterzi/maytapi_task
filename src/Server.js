@@ -1,5 +1,8 @@
 const express = require('express');
 const axios = require('axios');
+const mongoose = require('mongoose');
+const Message = require('./Message');
+
 // Statik değişkenler:
 const PORT = 80;
 const MAYTAPI_PRODUCTID = 'a9dd11ab-7e50-4086-975c-b45cdb75d001';
@@ -12,6 +15,11 @@ app.use(express.json());
 app.get('/', (req, res) => {
     res.send('Merhaba dünya! Şu anda test sunucusu çalışıyor.');
 });
+// MongoDB bağlantısı
+mongoose.connect('mongodb+srv://muhammedterzi:HqmkaLvxJHQ9hh3K@maytapi.qwhhj.mongodb.net/maytapi_task')
+.then(() => console.log('MongoDB bağlantısı başarılı!'))
+.catch(err => console.error('MongoDB bağlantısı başarısız:', err));
+
 
 // Text Message
 app.post('/mesaj/text', async (req, res) => {
@@ -42,6 +50,15 @@ app.post('/mesaj/text', async (req, res) => {
         else {
             //  Veritabanı işlemleri buraya gelecek.
             // response.data.data.chatId, response.data.data.msgId
+            const newMessage = new Message({
+                chatId: response.data.data.chatId,
+                messageId: response.data.data.msgId,
+                toNumber: toNumber,
+                type: "text",
+                content: message
+            });
+
+            await newMessage.save();
             res.status(200).send('Mesaj basariyla gonderildi!');
         }
     }
@@ -84,6 +101,16 @@ app.post('/mesaj/poll', async (req, res) => {
         else {
             //  Veritabanı işlemleri buraya gelecek.
             // response.data.data.chatId, response.data.data.msgId
+            const newMessage = new Message({
+                chatId: response.data.data.chatId,
+                messageId: response.data.data.msgId, 
+                toNumber: toNumber,
+                type: "poll", 
+                content: message, 
+                options: options 
+            });
+
+            await newMessage.save(); 
             res.status(200).send('Mesaj basariyla gonderildi!');
         }
     }
@@ -122,6 +149,15 @@ app.post('/mesaj/media', async (req, res) => {
         else {
             //  Veritabanı işlemleri buraya gelecek.
             // response.data.data.chatId, response.data.data.msgId
+            const newMessage = new Message({
+                chatId: response.data.data.chatId,
+                messageId: response.data.data.msgId, 
+                toNumber: toNumber,
+                type: "media", 
+                content: message
+            });
+
+            await newMessage.save(); 
             res.status(200).send('Mesaj basariyla gonderildi!');
         }
     }
