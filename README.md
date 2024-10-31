@@ -8,14 +8,14 @@ Bu repoda verilen [task](https://docs.google.com/document/d/1E6NPFkdZBhbjoOd2m-8
 
 Bu alanda gönderilen mesajların, nasıl gönderildiği ile alakalı bilgiler yer alacak.
 
-Tüm proje localdaki 80 portundan işlem görmektedir.
+Tüm proje localdaki 4040 portundan işlem görmektedir.
 Kullanım için <mark>mesaj</mark> ön tanımı ile gönderilmek istenen tür belirtilerek istek yollanır.
 
->**Örneğin:** Anket türünde bir mesaj göndermek istiyorsam http://localhost/mesaj/poll ile istek yollamalıyım.
+>**Örneğin:** Anket türünde bir mesaj göndermek istiyorsam http://localhost:4040/mesaj/poll ile istek yollamalıyım.
 
 1. #### Text Mesaj Türü
     * API'yi kullanmak için POSTMAN ile POST tipinde istek yollayacağız 
-(<mark>http://localhost/mesaj/text<mark>)
+(<mark>http://localhost:4040/mesaj/text<mark>)
     * text türü için gerekli bilgiler; 
        * **toNumber** : alıcının numarası
        * **message** : mesaj içeriği 
@@ -30,7 +30,7 @@ Kullanım için <mark>mesaj</mark> ön tanımı ile gönderilmek istenen tür be
        ```
 2. #### Poll Mesaj Türü
     * API'yi kullanmak için POSTMAN ile POST tipinde istek yollayacağız 
-(<mark>http://localhost/mesaj/poll<mark>)
+(<mark>http://localhost:4040/mesaj/poll<mark>)
     * poll türü için gerekli bilgiler; 
        * **toNumber** : alıcının numarası
        * **message** : anketin mesaj içeriği 
@@ -48,7 +48,7 @@ Kullanım için <mark>mesaj</mark> ön tanımı ile gönderilmek istenen tür be
        ```
 3. #### Media Mesaj Türü
     * API'yi kullanmak için POSTMAN ile POST tipinde istek yollayacağız 
-(<mark>http://localhost/mesaj/media<mark>)
+(<mark>http://localhost:4040/mesaj/media<mark>)
     * media türü için gerekli bilgiler; 
        * **toNumber** : alıcının numarası
        * **message** : gönderilecek media içeriğinin bağlantısı (direkt url veya base64 gibi bir formatta gönderim yapabilirsiniz)
@@ -73,4 +73,4 @@ Kullanım için <mark>mesaj</mark> ön tanımı ile gönderilmek istenen tür be
    
 ## Mesaj Alma
 
-Bu adımdaki gereksinimleri tamamlayamadım. Araştırmalarım sonucunda webhook ile mesaj dönüt işlemlerinin (iletildi,  görüldü, mesaj alındı vb.) yapılabileceğini anladım. Fakat araştırdığımda bu işlem için bir sunucuya ihtiyacımın olduğunu ve o sunucudan da benim API'ye istekte bulunmam gerektiğini anladım.
+Mesajlar, /webhook ile 4040 portundan istek almakta ve gelen mesajlar MongoDB'ye kayıt edilmektedir.

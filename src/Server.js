@@ -2,12 +2,14 @@ const express = require('express');
 const axios = require('axios');
 const mongoose = require('mongoose');
 const Message = require('./Message');
+const getMessage = require('./getMessage');
 
 // Statik değişkenler:
-const PORT = 80;
+const PORT = 4040;
 const MAYTAPI_PRODUCTID = 'a9dd11ab-7e50-4086-975c-b45cdb75d001';
 const MAYTAPI_TOKEN = '4f665094-ca74-479d-a1c0-48bcee056da1';
 const MAYTAPI_PHONEID = 59003;
+
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -166,8 +168,40 @@ app.post('/mesaj/media', async (req, res) => {
     }
 });
 
-app.post('/mesaj/webhook', async (req, res) => {
-    // Alınan mesajlar, görüldü bilgileri bu alanda işlenecek.
+app.post('/webhook', async (req, res) => {
+    
+    const message = req.body;
+
+    // message.type, message.text message.id 
+    // user.id, user.name, user.phone
+    // timestamp
+    // conversation, conversation_name
+    
+    console.log('Received message:', message.message);
+    console.log('Received User:', message.user);
+    console.log('Received Timestamp:', message.timestamp);
+    try {
+        const newGetMessage = new getMessage({
+            message_id: message.message.id,
+            message_text: message.message.text,
+            message_type: message.message.type,
+            message_url: message.message.url,
+            message_options: message.message.options,
+            user_id: message.user.id,
+            user_name: message.user.name,
+            user_phone: message.user.phone,
+            timestamp: message.timestamp,
+            conversation: message.conversation,
+            conversation_name: message.conversation_name
+        });
+
+        await newGetMessage.save();
+        console.log('Mesaj MongoDB veritabanına kaydedildi.');
+    } catch (error) {
+        console.error('Mesaj Kaydedilirken Hata:', error);
+    }
+    // Respond to Maytapi
+    res.sendStatus(200);
 });
 
 app.listen(PORT, () => {
