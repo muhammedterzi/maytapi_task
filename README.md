@@ -42,7 +42,7 @@ Kullanım için <mark>mesaj</mark> ön tanımı ile gönderilmek istenen tür be
        {
          "toNumber": "905555555555",
           "message": "Tavşanlar Kaç Ayaklıdır?",
-          "options": [2","4"],
+          "options": ["2","4"],
           "only_one": true
        }
        ```
@@ -73,4 +73,4 @@ Kullanım için <mark>mesaj</mark> ön tanımı ile gönderilmek istenen tür be
    
 ## Mesaj Alma
 
-Mesajlar, /webhook ile 4040 portundan istek almakta ve gelen mesajlar MongoDB'ye kayıt edilmektedir.
+
